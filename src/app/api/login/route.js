@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { createYoga, createSchema } from "graphql-yoga";
 import { db } from "@/lib/config";
 
