@@ -7,6 +7,7 @@ import { login } from './redux/Slice/slice'
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function Home() {
@@ -64,13 +65,17 @@ export default function Home() {
       });
 
       const text = await res.text();
-      console.log("RAW RESPONSE:", text);
+      // console.log("RAW RESPONSE:", text);
 
       const response = JSON.parse(text);
-      console.log("GraphQL response:", response);
+      // console.log("GraphQL response:", response);
 
       if (response.errors) {
-        alert(response.errors[0].message);
+          toast.error(response.errors[0].message, {
+          duration: 4000,
+          position: "top-center",
+          removeDelay: 1000,
+        });
         return;
       }
 
@@ -78,10 +83,18 @@ export default function Home() {
 
       if (success) {
         dispatch(login({ id: user.id, email: user.email }));
-        alert("Login successful");
+        toast.success(message, {
+          duration: 4000,
+          position: "top-center",
+          removeDelay: 1000,
+        });
         navigate.push('/dashboard/home')
       } else {
-        alert(message);
+        toast.error(message, {
+          duration: 4000,
+          position: "top-center",
+          removeDelay: 1000,
+        });
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -93,6 +106,7 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Login
@@ -108,7 +122,7 @@ export default function Home() {
               type="email"
               name="email"
               placeholder="Enter Email ID"
-              className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
+              className="px-4 py-2 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
               onChange={handlechanges}
             />
           </div>
@@ -118,18 +132,26 @@ export default function Home() {
             <label className="text-sm font-medium text-gray-600 mb-1">
               Password
             </label>
-            <input
-              type={showeye ? "password" : "text"}
-              name="password"
-              placeholder="Enter Password"
-              className="w-full px-4 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
-              onChange={handlechanges}
-            />
-            <span
-              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-orange-500"
-              onClick={ShowEye}
-            >{showeye ? <FaEyeSlash /> : <FaEye />}</span>
+
+            {/* input + eye wrapper */}
+            <div className="relative">
+              <input
+                type={showeye ? "password" : "text"}
+                name="password"
+                placeholder="Enter Password"
+                className="w-full px-4 py-2 pr-10 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
+                onChange={handlechanges}
+              />
+
+              <span
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-orange-500"
+                onClick={ShowEye}
+              >
+                {showeye ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
           </div>
+
 
           {/* Button */}
           <button

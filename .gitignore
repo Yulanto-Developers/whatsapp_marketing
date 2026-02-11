@@ -42,4 +42,4 @@ next-env.d.ts
 
 
 # envirnoment variable
-.env
+.env.local

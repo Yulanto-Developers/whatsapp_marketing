@@ -1,7 +1,7 @@
 "use client";
 
 import { Geist, Geist_Mono } from "next/font/google";
-import { useState } from "react";
+// import { useState } from "react";
 import "./globals.css";
 import ReduxProvider from "./redux/provider";
 // import SideBar from "./Components/SideBar";
@@ -26,12 +26,9 @@ export default function RootLayout({ children }) {
       >
         <ReduxProvider>
           {/* <SideBar open={open} setOpen={setOpen} /> flex h-screen overflow-hidden */}
-          <main
-            className={`flex-1 transition-all duration-300 bg-[#efeae2] 
-            }`}
-          >
-            {children}
-          </main>
+
+          {children}
+          {/* </main> */}
         </ReduxProvider>
       </body>
     </html>

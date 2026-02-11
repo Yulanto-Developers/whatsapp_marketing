@@ -20,7 +20,7 @@ function SideBar({ open, setOpen }) {
 
    
       <ul className="mt-4 space-y-1">
-        <NavItem href="/home" label="Message" open={open} />
+        <NavItem href="/dashboard/home" label="Message" open={open} />
         {/* <NavItem href="/group" label="Group" open={open} />
         <NavItem href="/campaign" label="Campaign" open={open} />
         <NavItem href="/settings" label="Settings" open={open} /> */}
