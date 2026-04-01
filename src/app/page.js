@@ -136,7 +136,7 @@ export default function Home() {
             {/* input + eye wrapper */}
             <div className="relative">
               <input
-                type={showeye ? "password" : "text"}
+                type={showeye ? "text" : "password"}
                 name="password"
                 placeholder="Enter Password"
                 className="w-full px-4 py-2 pr-10 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"

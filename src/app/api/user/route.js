@@ -8,7 +8,7 @@ export async function GET() {
   MAX(m.id) AS id,
   COALESCE(m.contact_name, l.name) AS contact_name,
   m.phone_number,
-  MAX(m.sent_at) AS sent_at,
+  MAX(m.sent_at) AS sent_ats,
   SUBSTRING_INDEX(
     GROUP_CONCAT(m.message_content ORDER BY m.sent_at DESC),
     ',', 1
